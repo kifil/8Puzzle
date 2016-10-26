@@ -1,7 +1,5 @@
 import edu.princeton.cs.algs4.Queue;
 
-import java.util.Comparator;
-
 public class Board {
     private int[][] boardBlocks;
     private int boardDimension;
