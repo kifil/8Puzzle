@@ -1,9 +1,12 @@
 import edu.princeton.cs.algs4.Queue;
 
+import java.util.Comparator;
+
 public class Board {
     private int[][] boardBlocks;
     private int boardDimension;
 
+    // construct a board from an n-by-n array of blocks
     public Board(int[][] blocks){
         boardDimension = blocks.length;
 
@@ -16,12 +19,14 @@ public class Board {
             }
         }
 
-    }           // construct a board from an n-by-n array of blocks
+    }
 
     // board dimension n
     public int dimension(){
         return boardDimension;
     }
+
+
 
     // number of blocks out of place
     public int hamming() {
