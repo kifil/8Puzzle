@@ -6,6 +6,10 @@ public class Board {
 
     // construct a board from an n-by-n array of blocks
     public Board(int[][] blocks){
+        if(blocks == null){
+            throw new java.lang.NullPointerException();
+        }
+
         boardDimension = blocks.length;
 
         boardBlocks = new int[boardDimension][boardDimension];
@@ -23,7 +27,6 @@ public class Board {
     public int dimension(){
         return boardDimension;
     }
-
 
 
     // number of blocks out of place
@@ -93,7 +96,6 @@ public class Board {
                 if(currentBlockValue !=0 && firstNonZeroRow != null && secondNonZeroRow == null){
                     secondNonZeroRow = i;
                     secondNonZeroColumn = j;
-                    //make sure this breaks out?????
                     break;
                 }
             }
@@ -110,6 +112,7 @@ public class Board {
         return boardCopy;
     }
 
+    // does this board equal y?
     public boolean equals(Object y){
         if (y == this) return true;
         if (y == null) return false;
@@ -131,7 +134,7 @@ public class Board {
         }
 
         return true;
-    }        // does this board equal y?
+    }
 
     // all neighboring boards
     public Iterable<Board> neighbors(){
@@ -151,7 +154,6 @@ public class Board {
 
         //get any valid neighboring swaps
         if(zeroBlock.row - 1 >= 0){
-            //adjacentBlocks.enqueue(new Block(zeroBlock.row - 1, zeroBlock.column, boardBlocks[zeroBlock.row - 1][zeroBlock.column]));
             Board neighbor = new Board(boardBlocks);
             //swap top neighbor
             neighbor.boardBlocks[zeroBlock.row][zeroBlock.column] = neighbor.boardBlocks[zeroBlock.row-1][zeroBlock.column];
@@ -211,5 +213,5 @@ public class Board {
 
     public static void main(String[] args){
 
-    } // unit tests (not graded)
+    }
 }

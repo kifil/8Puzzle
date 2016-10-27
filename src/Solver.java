@@ -27,8 +27,8 @@ public class Solver {
             //update priority queue for given board
             Iterable<Board> neighbors = currentNode.board.neighbors();
             for (Board neighbor: neighbors) {
-                //add neighbors to queue, but exclude the board identical to the current node
-                if(neighbor != currentNode.board){
+                //add neighbors to queue, but exclude the board identical to the previous node
+                if(currentNode.previousNode == null || !neighbor.equals(currentNode.previousNode.board)){
                     SearchNode nextNode = new SearchNode(currentNode,neighbor,currentNode.movesMade + 1);
                     givenBoardPQ.insert(nextNode);
                 }
@@ -40,8 +40,8 @@ public class Solver {
             //update priority queue for twin board
             Iterable<Board> twinNeighbors = currentTwinNode.board.neighbors();
             for (Board twinNeighbor: twinNeighbors) {
-                //add neighbors to queue, but exclude the board identical to the current node
-                if(twinNeighbor != currentTwinNode.board){
+                //add neighbors to queue, but exclude the board identical to the previous node
+                if(currentNode.previousNode == null || !twinNeighbor.equals(currentNode.previousNode.board)){
                     SearchNode nextTwinNode = new SearchNode(currentTwinNode,twinNeighbor,currentTwinNode.movesMade + 1);
                     twinBoardPQ.insert(nextTwinNode);
                 }
@@ -105,14 +105,12 @@ public class Solver {
         SearchNode(SearchNode previous, Board b, int m){
             previousNode = previous;
             board = b;
-            movesMade = m;
         }
 
         private static final Comparator<SearchNode> ByManhattan  = new ByManhattan();
 
         private static class ByManhattan implements Comparator<SearchNode>{
             public int compare(SearchNode v, SearchNode w){
-                //is this the right order?
                 if(v.board.manhattan() + v.movesMade < w.board.manhattan() + w.movesMade){
                     return -1;
                 }
