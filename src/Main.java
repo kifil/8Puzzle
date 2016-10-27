@@ -14,16 +14,6 @@ public class Main {
                 blocks[i][j] = in.readInt();
         Board initial = new Board(blocks);
 
-        Board initial2 = new Board(blocks);
-
-        Board thing = initial.twin();
-
-        boolean isTrue = initial == initial;
-        boolean isTrue2 = initial.equals(initial2);
-        boolean isFalse = initial.equals(thing);
-
-        Iterable<Board> neighbors = initial.neighbors();
-
         StdOut.println(initial);
 
         // solve the puzzle
